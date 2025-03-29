@@ -41,7 +41,7 @@ function App() {
 
 	return (
 		<div className="border-2">
-			<h1>Workout Plan Generator</h1>
+			<h1 className="text-green-700">Workout Plan Generator</h1>
 			<input
 				type="text"
 				placeholder="Age"
