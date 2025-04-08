@@ -8,6 +8,7 @@ function App() {
 	const [goal, setGoal] = useState("");
 	const [days, setDays] = useState("");
 	const [experience, setExperience] = useState("");
+	const [healthIssues, setHealthIssues] = useState("");
 	const [plan, setPlan] = useState("");
 	const [loading, setLoading] = useState(false);
 	const [error, setError] = useState("");
@@ -24,6 +25,7 @@ function App() {
 				goal,
 				days,
 				experience,
+				healthIssues,
 			});
 			setPlan(response.data.plan);
 		} catch (err) {
@@ -35,55 +37,81 @@ function App() {
 				setError("Network error");
 			}
 		}
-
 		setLoading(false);
 	};
 
 	return (
-		<div className="border-2">
-			<h1 className="text-green-700">Workout Plan Generator</h1>
-			<input
-				type="text"
-				placeholder="Age"
-				value={age}
-				onChange={(e) => setAge(e.target.value)}
-			></input>
-			<input
-				type="text"
-				placeholder="weight"
-				value={weight}
-				onChange={(e) => setWeight(e.target.value)}
-			/>
-			<input
-				type="text"
-				placeholder="goal"
-				value={goal}
-				onChange={(e) => setGoal(e.target.value)}
-			/>
-			<input
-				type="text"
-				placeholder="days"
-				value={days}
-				onChange={(e) => setDays(e.target.value)}
-			/>
-			<input
-				type="text"
-				placeholder="experience"
-				value={experience}
-				onChange={(e) => setExperience(e.target.value)}
-			/>
-			<button onClick={generatePlan} disabled={loading}>
-				{loading ? "Generating Plan..." : "Generate Plan"}
-			</button>
-
-			{error && <p className="text-red-600">{error}</p>}
-
-			{plan && (
-				<div className="border-2 rounded">
-					<h2>Your Workout Plan</h2>
-					<p>{plan}</p>
+		<div className="bg-neutral-100-50 text-black flex flex-col justify-around place-items-center">
+			<h1 className="text-4xl text-slate-800 ">
+				Personal Workout Plan Generator
+			</h1>
+			<div className="border-2 rounded m-3 flex flex-col place-items-center">
+				<div className="grid grid-cols-2 w-full gap-4">
+					<input
+						className="m-2 border rounded border-b-gray-900"
+						type="text"
+						placeholder="Age"
+						value={age}
+						onChange={(e) => setAge(e.target.value)}
+					></input>
+					<input
+						className="m-2 border rounded border-b-gray-900"
+						type="text"
+						placeholder="Weight"
+						value={weight}
+						onChange={(e) => setWeight(e.target.value)}
+					/>
+					<input
+						className="m-2 border rounded border-b-gray-900"
+						type="text"
+						placeholder="Goal"
+						value={goal}
+						onChange={(e) => setGoal(e.target.value)}
+					/>
+					<input
+						className="m-2 border rounded border-b-gray-900"
+						type="text"
+						placeholder="Days"
+						value={days}
+						onChange={(e) => setDays(e.target.value)}
+					/>
+					<input
+						className="m-2 border rounded border-b-gray-900"
+						type="text"
+						placeholder="Experience"
+						value={experience}
+						onChange={(e) => setExperience(e.target.value)}
+					/>
+					<input
+						className="m-2 border rounded border-b-gray-900"
+						type="text"
+						placeholder="Health issues"
+						value={healthIssues}
+						onChange={(e) => setHealthIssues(e.target.value)}
+					/>
 				</div>
-			)}
+				<button
+					className="text-slate-900 m-2 border rounded border-slate-900 w-1/3 font-semibold hover:bg-slate-900 hover:text-white transition"
+					onClick={generatePlan}
+					disabled={loading}
+				>
+					{loading ? "Generating Plan..." : "Generate Plan"}
+				</button>
+				<div className="m-3">
+					{error && <p className="text-red-600">{error}</p>}
+
+					{plan && (
+						<div className="border rounded border-b-blue-900">
+							<h2 className="text-2xl text-slate-800 m-2">Your Workout Plan</h2>
+							{plan.split("###").map((paragraph, index) => (
+								<p key={index} className="m-3">
+									{paragraph}
+								</p>
+							))}
+						</div>
+					)}
+				</div>
+			</div>
 		</div>
 	);
 }

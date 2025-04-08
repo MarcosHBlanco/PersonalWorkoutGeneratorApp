@@ -11,9 +11,9 @@ app.use(express.json());
 const client = new OpenAI();
 
 app.post("/generate-plan", async (req, res) => {
-	const { age, weight, goal, days, experience } = req.body;
+	const { age, weight, goal, days, experience, healthIssues } = req.body;
 
-	const prompt = `Create a personalized ${days}-day workout plan for someone who is ${age} years old, weighs ${weight}kg, has a fitness goal of "${goal}", and has ${experience} experience level.`;
+	const prompt = `Analyse ${healthIssues} of the user. Create a personalized ${days}-day workout plan for someone who is ${age} years old, weighs ${weight}kg, has a fitness goal of "${goal}", and has ${experience} experience level.`;
 
 	try {
 		const completion = await client.chat.completions.create({
