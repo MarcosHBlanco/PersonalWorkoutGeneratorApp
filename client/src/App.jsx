@@ -8,10 +8,8 @@ function App() {
 
 	const generatePlan = async (inputs) => {
 		try {
-			const res = await axios.post(
-				"http://localhost:4000/generate-plan",
-				inputs
-			);
+			const API = import.meta.env.VITE_API_URL;
+			const res = await axios.post(`${API}/generate-plan`, inputs);
 			setPlan(res.data.plan);
 		} catch {
 			setPlan("Failed to load plan. Try again.");
