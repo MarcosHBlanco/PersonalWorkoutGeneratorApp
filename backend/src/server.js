@@ -5,8 +5,14 @@ import cors from "cors";
 import OpenAI from "openai";
 
 const app = express();
-app.use(cors({ origin: "*" }));
-app.options("*", cors({ origin: "*" }));
+app.use((req, res, next) => {
+	res.header("Access-Control-Allow-Origin", "*"); // allow any origin
+	res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+	res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+	// if this is a pre-flight request, end it here
+	if (req.method === "OPTIONS") return res.sendStatus(204);
+	next();
+});
 
 app.use(express.json());
 
