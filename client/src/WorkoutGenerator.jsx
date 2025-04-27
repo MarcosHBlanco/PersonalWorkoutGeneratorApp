@@ -9,6 +9,7 @@ export default function WorkoutGenerator({ onGenerate, plan }) {
 		days: "",
 		experience: "",
 		healthIssues: "",
+		comments: "",
 	});
 	const [loading, setLoading] = useState(false);
 
@@ -38,6 +39,7 @@ export default function WorkoutGenerator({ onGenerate, plan }) {
 						{ name: "days", label: "Days per week" },
 						{ name: "experience", label: "Experience level" },
 						{ name: "healthIssues", label: "Health issues" },
+						{ name: "comments", label: "Additional comments" },
 					].map(({ name, label }) => (
 						<div key={name} className="flex flex-col">
 							<label className="mb-1 text-gray-600">{label}</label>

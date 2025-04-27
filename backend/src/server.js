@@ -1,6 +1,5 @@
 import dotenv from "dotenv";
 dotenv.config();
-
 import express from "express";
 import cors from "cors";
 import OpenAI from "openai";
@@ -19,8 +18,9 @@ const client = new OpenAI();
 
 // ── 4) Your endpoint ────────────────────────────────────────────────────────────
 app.post("/generate-plan", async (req, res) => {
-	const { age, weight, goal, days, experience, healthIssues } = req.body;
-	const prompt = `Analyse ${healthIssues} of the user. Create a personalized ${days}-day workout plan for someone who is ${age} years old, weighs ${weight}kg, has a fitness goal of "${goal}", and has ${experience} experience level.`;
+	const { age, weight, goal, days, experience, healthIssues, comments } =
+		req.body;
+	const prompt = `Analyse ${healthIssues} and ${comments} of the user. Create a personalized ${days}-day workout plan for someone who is ${age} years old, weighs ${weight}kg, has a fitness goal of "${goal}", and has ${experience} experience level.`;
 
 	try {
 		const completion = await client.chat.completions.create({
