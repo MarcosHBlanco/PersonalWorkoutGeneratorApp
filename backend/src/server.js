@@ -7,8 +7,8 @@ import OpenAI from "openai";
 const app = express();
 
 // ── 1) Enable CORS for all routes and all origins ─────────────────────────────
-app.use(cors()); // adds Access-Control-Allow-Origin: *
-app.options("*", cors()); // pre-flight for all routes
+app.use(cors());
+app.options("*", cors());
 
 // ── 2) JSON parser ──────────────────────────────────────────────────────────────
 app.use(express.json());
@@ -16,7 +16,7 @@ app.use(express.json());
 // ── 3) OpenAI client ────────────────────────────────────────────────────────────
 const client = new OpenAI();
 
-// ── 4) Your endpoint ────────────────────────────────────────────────────────────
+// ── 4) Endpoint ────────────────────────────────────────────────────────────
 app.post("/generate-plan", async (req, res) => {
 	const { age, weight, goal, days, experience, healthIssues, comments } =
 		req.body;
@@ -34,6 +34,6 @@ app.post("/generate-plan", async (req, res) => {
 	}
 });
 
-// ── 5) Listen on dynamic PORT ───────────────────────────────────────────────────
+// ── 5) Listen PORT ───────────────────────────────────────────────────
 const port = parseInt(process.env.PORT) || 4000;
 app.listen(port, () => console.log(`Server running on port ${port}`));
