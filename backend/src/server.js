@@ -25,7 +25,7 @@ app.post("/generate-plan", async (req, res) => {
 
 	try {
 		const completion = await client.chat.completions.create({
-			model: "gpt-4o",
+			model: "gpt-5",
 			messages: [{ role: "user", content: prompt }],
 		});
 		res.json({ plan: completion.choices[0].message.content });
