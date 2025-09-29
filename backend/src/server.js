@@ -20,7 +20,8 @@ const client = new OpenAI();
 app.post("/generate-plan", async (req, res) => {
 	const { age, weight, goal, days, experience, healthIssues, comments } =
 		req.body;
-	const prompt = `Analyse ${healthIssues} and ${comments} of the user. Create a personalized ${days}-day workout plan for someone who is ${age} years old, weighs ${weight}kg, has a fitness goal of "${goal}", and has ${experience} experience level.`;
+	const prompt = `Analyse ${healthIssues} and ${comments} of the user. Create a personalized ${days}-day workout plan for someone who is ${age} years old, weighs ${weight}kg, has a fitness goal of "${goal}", and has ${experience} experience level.
+	Also, make it very readable. Separate Days with "***" symbols, separate exercises with some kind of label. This is to make it easier for me to manipulate. Do not include on your reply anything besides the workout plan`;
 
 	try {
 		const completion = await client.chat.completions.create({
