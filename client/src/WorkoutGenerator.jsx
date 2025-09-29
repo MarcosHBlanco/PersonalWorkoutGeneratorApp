@@ -72,7 +72,9 @@ export default function WorkoutGenerator({ onGenerate, plan }) {
 						{plan.split("***").map((p, i) => (
 							<p key={i} className="leading-relaxed">
 								{p.split("**").map((exercise, i) => (
-									<strong key={i}>{exercise}</strong>
+									<strong key={i}>
+										{exercise} <br />
+									</strong>
 								))}
 							</p>
 						))}
